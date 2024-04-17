@@ -3,6 +3,9 @@ import './App.css';
 import styled from '@emotion/styled';
 import { Header } from 'components/Header';
 import { BlogPost } from 'components/BlogPost'
+import { useState, useEffect } from 'react';
+import mockPosts from 'mock/posts.json';
+
 
 const Container = styled.div`
   height: 100vh;
@@ -13,14 +16,28 @@ const Container = styled.div`
   overflow: scroll;
 `;
 
+interface Post {
+  readonly id: number;
+  readonly userId: number;
+  readonly title: string;
+  readonly body: string;
+}
 
 function App() {
+  const [posts, setPosts] = useState<ReadonlyArray<Post>>([]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setPosts(mockPosts);
+    }, 1000);
+  }, []);
+
   return (
     <Container>
       <Header />
-      <BlogPost 
-        title="sunt aut facere repellat provident occaecati excepturi optio reprehenderit" 
-        body="quia et suscipit nsuscipit recusandae consequuntur expedita et cum nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"/>
+      {posts.map((post) => (
+        <BlogPost key={post.id} title={post.title} body={post.body} />
+      ))}
     </Container>
   );
 }
