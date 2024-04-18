@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 
-
 const Container = styled.div`
   background-color: #ffffff;
   padding: 20px;
@@ -14,9 +13,9 @@ const Title = styled.div`
 `;
 
 export const Header = () => {
-    return (
-        <Container>
-            <Title>블로그 포스트</Title>
-        </Container>
-    )
-}
+  return (
+    <Container>
+      <Title>블로그 포스트</Title>
+    </Container>
+  );
+};
