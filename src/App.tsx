@@ -31,6 +31,7 @@ interface Post {
 
 function App() {
   const [posts, setPosts] = useState<ReadonlyArray<Post>>([]);
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/posts')
@@ -48,9 +49,9 @@ function App() {
         <BlogPost key={post.id} title={post.title} body={post.body} />
       ))}
       <ButtonContainer>
-        <Button label="등록" />
+        <Button label="등록" onClick={() => setShowForm(true)} />
       </ButtonContainer>
-      <Form />
+      {showForm && <Form onClose={() => setShowForm(false)} />}
     </Container>
   );
 }
